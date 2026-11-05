@@ -4,7 +4,7 @@ qgisMinimumVersion=3.34
 description=Create terrain-following road corridors and level platforms in a DEM, with smooth transitions to the surrounding ground.
 version=0.3.6
 author=Vipul Chhikara
-email=vinod.chhikara@gmail.com
+email=vipul.chhikara@gmail.com
 about=DEM Editor for Roads and Platforms helps you reshape a digital elevation model (DEM) in QGIS. You can use it to create a road corridor that follows the terrain or flatten an area to a chosen elevation. The plugin saves the result as a new GeoTIFF and leaves your original DEM unchanged.
     In Road mode, draw a centerline and set a buffer distance on the left, right, or both sides. The plugin creates a surface that is flat across the road and follows a smoothed elevation profile along its length. You can adjust the profile smoothing to control how the road follows changes in terrain.
     In Flat corridor mode, you can set the whole area to an elevation you enter or use the mean or median elevation along its edge. Define the area by drawing a buffered line, selecting polygon features, or using all features in a polygon layer.
