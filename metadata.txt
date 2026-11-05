@@ -1,0 +1,23 @@
+[general]
+name=DEM Editor for Roads and Platforms
+qgisMinimumVersion=3.34
+description=Create terrain-following road corridors and level platforms in a DEM, with smooth transitions to the surrounding ground.
+version=0.3.6
+author=Vipul Chhikara
+email=vinod.chhikara@gmail.com
+about=DEM Editor for Roads and Platforms helps you reshape a digital elevation model (DEM) in QGIS. You can use it to create a road corridor that follows the terrain or flatten an area to a chosen elevation. The plugin saves the result as a new GeoTIFF and leaves your original DEM unchanged.
+    In Road mode, draw a centerline and set a buffer distance on the left, right, or both sides. The plugin creates a surface that is flat across the road and follows a smoothed elevation profile along its length. You can adjust the profile smoothing to control how the road follows changes in terrain.
+    In Flat corridor mode, you can set the whole area to an elevation you enter or use the mean or median elevation along its edge. Define the area by drawing a buffered line, selecting polygon features, or using all features in a polygon layer.
+    An optional outside transition blends the edited surface into the surrounding ground. The plugin also saves a separate polygon shapefile of the corridor and reports the number of changed pixels and the maximum cut and fill.
+    Before you start: Use a file-based, single-band DEM. Both the DEM and the QGIS project need projected coordinate systems with metre units. Choose a DEM resolution suited to the width you want to represent.
+    When you buffer both sides of a line, the distance applies to each side. For example, a 5 m buffer on both sides creates a road approximately 10 m wide.
+    The output retains the source DEM resolution and data type; elevations in an integer DEM are rounded. The outside transition is a smooth visual blend, so review the result separately for engineering design. The plugin requires GDAL, NumPy and SciPy in the QGIS Python environment.
+homepage=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
+repository=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
+tracker=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/issues
+category=Raster
+icon=icon.png
+experimental=True
+deprecated=False
+changelog=0.3.6 - Add project homepage, source repository and issue tracker links.
+tags=dem,raster,road,buffer,terrain,corridor,flatten
