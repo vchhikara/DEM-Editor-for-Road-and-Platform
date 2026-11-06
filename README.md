@@ -1,91 +1,133 @@
-# DEM Editor for Roads and Platforms
+<h1 align="center">DEM Editor for Roads and Platforms</h1>
 
-Copyright (c) Vipul Chhikara. Licensed under the GNU General Public License,
-version 3 or (at your option) any later version; see `LICENSE`.
+<p align="center">
+  <img src="docs/images/banner.png" alt="DEM Editor for Roads and Platforms, a QGIS plugin that reshapes terrain for roads and level pads" width="100%">
+</p>
 
-QGIS plugin that edits a DEM inside a road corridor. The corridor is either
-digitized as a new centerline or taken from selected polygons, buffered when
-needed, and used to define the edited surface. An optional outside transition
-blends the surrounding terrain into that surface.
+<p align="center">
+  <img src="icon.png" alt="Plugin icon" width="96">
+</p>
 
-Requires QGIS 3.34 or newer, with the GDAL, NumPy and SciPy Python modules that
-QGIS bundles.
+<p align="center">
+  <strong>Cut a road corridor or a level platform into a DEM and blend it into the surrounding ground.</strong><br>
+  The result is a new GeoTIFF. Your original DEM stays unchanged.
+</p>
 
-## Installation
+<p align="center">
+  <img alt="QGIS" src="https://img.shields.io/badge/QGIS-3.34%20to%204.x-589632?logo=qgis&logoColor=white">
+  <img alt="Python" src="https://img.shields.io/badge/Python-PyQGIS-3776AB?logo=python&logoColor=white">
+  <img alt="Status" src="https://img.shields.io/badge/status-experimental-orange">
+  <a href="LICENSE"><img alt="License: GPL-3.0-or-later" src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue"></a>
+</p>
 
-Copy this folder into your QGIS profile's `python/plugins` directory (or install
-the folder as a ZIP from the Plugin Manager), then enable **DEM Editor for Roads and Platforms** in the Plugins manager.
+Site planners, road designers and GIS analysts often need a quick terrain model that shows a road or a building pad cut into the ground. DEM Editor for Roads and Platforms edits a DEM along a line you draw or inside polygons you select. It flattens the corridor, follows the terrain along the road, and blends the edit into the ground around it.
 
-## Edit modes
+What you can do:
 
-- **Road (terrain-hugging):** the corridor is flattened across its width while
-  following the terrain along the road. At each station the plugin uses the
-  median valid DEM elevation across the buffer, then smooths this profile along
-  the road. This tends to balance cut and fill within the sampled corridor;
-  it does not guarantee a minimum cut volume or an engineered road design.
-- **Flat corridor:** the whole corridor is set to a single elevation, taken
-  either from an entered value or from the average height of the corridor edge
-  (median by default, mean optional).
+- Draw a centerline and set a buffer distance on the left, right, or both sides.
+- Create a road surface that is flat across its width and follows a smoothed elevation profile along its length.
+- Level a corridor or a polygon area to an elevation you enter, or to the mean or median elevation along its edge.
+- Blend the edited surface into the surrounding terrain over a transition width you choose.
+- Read the number of changed pixels and the maximum cut and fill when the edit finishes.
 
-The outside transition width blends the edited road or flat area into the
-original DEM outside the corridor. Ground above the edited surface is lowered
-and ground below it is raised, giving a smooth visual cut-and-fill transition.
-The transition is a smooth blend, not an engineered slope with a specified
-grade, and may extend beyond the selected buffer or polygon. Use zero for a
-sharp edge. The default transition width is 20 m.
+**The plugin writes a new GeoTIFF and a corridor shapefile. It never modifies the source DEM.**
 
-## Workflow
+---
 
-1. Load a single-band DEM raster and set the project to a projected CRS with
-   meter units.
-2. Start **DEM Editor for Roads and Platforms** from the toolbar or the plugin menu.
+## Features
+
+| Feature | What it does |
+|---|---|
+| Road mode | Uses the median valid DEM elevation across the buffer at each station, then smooths the profile along the road. This tends to balance cut and fill in the sampled corridor. |
+| Flat corridor mode | Sets the whole corridor to one elevation. The elevation is an entered value, or the median or mean elevation of the corridor edge. |
+| Corridor sources | Digitize a new centerline, use selected polygon features, or use all features in a polygon layer. Polygons support Flat mode only. |
+| Outside transition | Lowers ground above the edited surface and raises ground below it. The default width is 20 m. Zero gives a sharp edge. |
+| Background task | The edit runs as a QGIS task with progress and a cancel button. |
+| Repeat edits | While the digitizing tool stays active, each new line edits the result of the previous run, so several roads accumulate in one terrain. |
+
+---
+
+## Getting started
+
+1. Download the plugin ZIP.
+2. In QGIS, open **Plugins > Manage and Install Plugins > Install from ZIP**.
+3. Select the ZIP and enable **DEM Editor for Roads and Platforms**.
+
+The plugin needs QGIS 3.34 or newer. It also needs the GDAL, NumPy and SciPy Python modules in the QGIS Python environment.
+
+---
+
+## How to use it
+
+1. Load a single-band DEM raster. Set the QGIS project to a projected CRS with meter units.
+2. Start the plugin from the toolbar or the plugin menu.
 3. Choose the corridor source:
-   - **Digitize a new centerline:** after accepting the dialog, click vertices
-     on the canvas. Double-click, press Enter, or right-click to finish. Escape
-     cancels the current line; pressing Escape again exits the tool.
-   - **Use selected polygon features:** choose the polygon layer and select
-     either **Selected features only** (select polygons before opening the
-     tool) or **All features in this layer**. The dialog reports the selection
-     and layer counts. Only Flat mode is available for polygons.
-4. Choose the edit mode and the DEM. The output paths default to the DEM
-   folder.
-5. The edit runs in a background task with progress and can be cancelled.
+   - **Digitize a new centerline.** Accept the dialog, then click vertices on the canvas. Double-click, press Enter, or right-click to finish. Escape cancels the current line. A second Escape exits the tool.
+   - **Use selected polygon features.** Choose the polygon layer. Select **Selected features only** or **All features in this layer**. The dialog shows the feature counts.
+4. Choose the edit mode, the DEM, and the output paths. The paths default to the DEM folder.
+5. Run the edit and wait for the result message.
 
-## Outputs
+When you buffer both sides of a line, the distance applies to each side. A 5 m buffer on both sides gives a road about 10 m wide, plus the outside transition.
 
-- A new GeoTIFF (`<dem>_road_edited.tif` by default) with the same CRS, extent,
-  resolution and pixel type as the source. The source DEM is never modified.
-  If the chosen path already exists, a numeric suffix is added
-  (`_2`, `_3`, ...) so no earlier result or loaded layer is overwritten.
-- A separate corridor shapefile (`<dem>_road_corridor.shp` by default) in the
-  DEM CRS. Each edit creates a new shapefile containing only its corridor, with
-  `mode`, `dist_m`, `side`, `stat`, `source`, `dem_path` and `edit_date`
-  attributes. If the path already exists, a numeric suffix is added.
-- Both outputs are added to the project when the edit finishes.
-- Earlier corridor layers remain in the project and can be hidden or removed
-  using the Layers panel. They are not copied into the new corridor file.
-- While the digitizing tool stays active, every new line edits the result of the
-  previous run (so several roads accumulate in the terrain) and writes the next
-  suffixed GeoTIFF.
+---
 
-## Notes and limitations
+## Where results go
 
-- The DEM must be a file-based single-band raster (for example a GeoTIFF). Both
-  the project and DEM must use projected CRSs in meters. Reproject a geographic
-  DEM before editing. Elevations are assumed to be in the desired vertical units.
-- A DEM in a different CRS from the project is supported; the corridor is
-  transformed automatically.
-- Nodata pixels inside the corridor are left untouched and reported in the
-  result message.
-- Road mode needs a digitized centerline; polygon input is flat-only because a
-  polygon alone does not define a reliable longitudinal axis.
-- The edited raster is a new file; there is no in-place overwrite or undo of the
-  raster edit.
-- Sharp bends can still produce self-intersecting buffers; invalid geometry is
-  repaired where possible, otherwise the run is refused with a message.
-- The output uses the original DEM resolution and data type. A buffer narrower
-  than a pixel may contain no pixel centers; integer DEMs round elevations.
-- Both sides uses the entered distance on each side of the centerline: a 10 m
-  buffer gives a road approximately 20 m wide, plus the outside transition.
-- The result message reports how many elevation values changed. If this is zero,
-  check the selected DEM, corridor, resolution, and elevation settings.
+| Output | Details |
+|---|---|
+| Edited DEM | `<dem>_road_edited.tif` by default. It keeps the CRS, extent, resolution and pixel type of the source. |
+| Corridor shapefile | `<dem>_road_corridor.shp` by default, in the DEM CRS. It holds one corridor with the attributes `mode`, `dist_m`, `side`, `stat`, `source`, `dem_path` and `edit_date`. |
+| Project layers | The plugin adds both outputs to the QGIS project when the edit finishes. |
+
+If a chosen path already exists, the plugin adds a numeric suffix (`_2`, `_3`) so no earlier result is overwritten.
+
+---
+
+## Troubleshooting
+
+| Problem | What to do |
+|---|---|
+| A message asks for a projected CRS | Set the project CRS to a projected system with meter units. Reproject a geographic DEM before you edit it. |
+| The result reports zero changed pixels | Check the DEM, the corridor, the resolution, and the elevation settings. |
+| The run is refused because of invalid geometry | Sharp bends can create self-intersecting buffers. Smooth the line or use fewer sharp vertices. |
+| The plugin does not load | Check that GDAL, NumPy and SciPy exist in the QGIS Python environment. |
+
+---
+
+## Limits
+
+- The DEM must be a file-based, single-band raster such as a GeoTIFF.
+- A DEM in a different CRS from the project is supported. The plugin transforms the corridor.
+- NoData pixels inside the corridor stay untouched. The result message reports them.
+- Road mode needs a digitized centerline. A polygon does not define a reliable longitudinal axis.
+- The output keeps the source resolution and data type. A buffer narrower than one pixel may contain no pixel center. An integer DEM rounds elevations.
+- The outside transition is a smooth visual blend. It is not an engineered slope with a specified grade, and it may extend beyond the buffer or polygon. Review the result separately for engineering design.
+- The plugin has no undo for a raster edit and no in-place overwrite.
+- The plugin passes tests on QGIS 4.2.3. QGIS 3.x is untested.
+
+---
+
+## For developers
+
+Build and validate the plugin ZIP:
+
+```bash
+python3 scripts/package_plugin.py --output dist/DEM_Editor_for_Road_and_Platform.zip
+python3 scripts/validate_plugin.py dist/DEM_Editor_for_Road_and_Platform.zip
+```
+
+Run the tests with the real QGIS bindings:
+
+```bash
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/share/qgis/python:/usr/lib/python3/dist-packages /usr/bin/python3 -m pytest -q tests
+```
+
+Release notes are in [CHANGELOG.md](CHANGELOG.md).
+
+---
+
+## Contributing
+
+Open an issue at [the issue tracker](https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/issues) to report a bug or suggest a change.
+
+Copyright (c) Vipul Chhikara. Licensed under the GNU General Public License, version 3 or (at your option) any later version. See [LICENSE](LICENSE).

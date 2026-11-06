@@ -3,7 +3,7 @@ import argparse, zipfile
 from pathlib import Path
 
 PLUGIN_FOLDER = "DEM_Editor_for_Road_and_Platform"
-INCLUDE = ["__init__.py", "metadata.txt", "LICENSE", "icon.png", "README.md", "CHANGELOG.md",
+INCLUDE = ["__init__.py", "metadata.txt", "LICENSE", "icon.png", "CHANGELOG.md",
            "buffer_dialog.py", "dem_editor.py", "dem_road_buffer.py", "map_tool.py", "road_output.py"]
 
 def main():
