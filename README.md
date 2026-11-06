@@ -16,7 +16,7 @@
 <p align="center">
   <img alt="QGIS" src="https://img.shields.io/badge/QGIS-3.34%20to%204.x-589632?logo=qgis&logoColor=white">
   <img alt="Python" src="https://img.shields.io/badge/Python-PyQGIS-3776AB?logo=python&logoColor=white">
-  <img alt="Status" src="https://img.shields.io/badge/status-experimental-orange">
+  <img alt="Tested" src="https://img.shields.io/badge/tested-QGIS%204.2.3-brightgreen">
   <a href="LICENSE"><img alt="License: GPL-3.0-or-later" src="https://img.shields.io/badge/license-GPL--3.0--or--later-blue"></a>
 </p>
 
@@ -116,7 +116,7 @@ python3 scripts/package_plugin.py --output dist/DEM_Editor_for_Road_and_Platform
 python3 scripts/validate_plugin.py dist/DEM_Editor_for_Road_and_Platform.zip
 ```
 
-Run the tests with the real QGIS bindings:
+Run the tests with the real QGIS bindings. The Python environment needs GDAL, NumPy, SciPy and pytest:
 
 ```bash
 QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/share/qgis/python:/usr/lib/python3/dist-packages /usr/bin/python3 -m pytest -q tests

@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.3.8
+
+- Add tests that run full Flat and Road edits on a synthetic DEM.
+- Mark the plugin as not experimental.
+
 ## 0.3.7
 
 - Use scoped Qt 6 and QGIS 4 enum names.

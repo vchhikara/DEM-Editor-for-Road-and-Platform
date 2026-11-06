@@ -8,10 +8,6 @@ from qgis.PyQt.QtWidgets import QWidget
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-@pytest.fixture(scope="module")
-def app():
-    a = QgsApplication([], False); a.initQgis(); yield a; a.exitQgis()
-
 def load(app):
     import importlib.util
     spec = importlib.util.spec_from_file_location("demplugin", os.path.join(ROOT, "__init__.py"),
