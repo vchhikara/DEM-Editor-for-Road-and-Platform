@@ -3,6 +3,7 @@ import os
 
 import numpy as np
 from qgis.core import (
+    Qgis,
     QgsCoordinateReferenceSystem,
     QgsCoordinateTransform,
     QgsCoordinateTransformContext,
@@ -525,7 +526,7 @@ def edit_dem(
 
         dem_crs = QgsCoordinateReferenceSystem()
         dem_crs.createFromWkt(projection)
-        if not dem_crs.isValid() or dem_crs.isGeographic() or dem_crs.mapUnits() != 0:
+        if not dem_crs.isValid() or dem_crs.isGeographic() or dem_crs.mapUnits() != Qgis.DistanceUnit.Meters:
             raise DemEditError('Reproject the DEM to a projected CRS with meter units first.')
         project_crs = QgsCoordinateReferenceSystem()
         project_crs.createFromWkt(project_crs_wkt)

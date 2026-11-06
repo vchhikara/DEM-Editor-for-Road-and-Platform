@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 
 from qgis.core import (
+    Qgis,
     QgsApplication,
     QgsCoordinateTransform,
     QgsGeometry,
@@ -64,7 +65,7 @@ class DemRoadBufferEditor:
 
     def start(self):
         crs = QgsProject.instance().crs()
-        if not crs.isValid() or crs.isGeographic() or crs.mapUnits() != 0:
+        if not crs.isValid() or crs.isGeographic() or crs.mapUnits() != Qgis.DistanceUnit.Meters:
             QMessageBox.warning(
                 self.iface.mainWindow(),
                 self.tr('Projected meter-based CRS required'),
@@ -79,7 +80,7 @@ class DemRoadBufferEditor:
         dialog = BufferDialog(
             self.iface.mainWindow(), active.id() if active is not None else None
         )
-        if dialog.exec_() != dialog.Accepted:
+        if dialog.exec() != dialog.DialogCode.Accepted:
             return
 
         settings = dialog.settings()
@@ -99,7 +100,7 @@ class DemRoadBufferEditor:
             )
             return
 
-        if not dem_layer.crs().isValid() or dem_layer.crs().isGeographic() or dem_layer.crs().mapUnits() != 0:
+        if not dem_layer.crs().isValid() or dem_layer.crs().isGeographic() or dem_layer.crs().mapUnits() != Qgis.DistanceUnit.Meters:
             self._warn('Reproject the DEM to a projected CRS with meter units before editing.')
             return
 

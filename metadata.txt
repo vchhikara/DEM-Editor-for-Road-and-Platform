@@ -1,8 +1,9 @@
 [general]
 name=DEM Editor for Roads and Platforms
 qgisMinimumVersion=3.34
+qgisMaximumVersion=4.99
 description=Create terrain-following road corridors and level platforms in a DEM, with smooth transitions to the surrounding ground.
-version=0.3.6
+version=0.3.7
 author=Vipul Chhikara
 email=vipul.chhikara@gmail.com
 about=DEM Editor for Roads and Platforms helps you reshape a digital elevation model (DEM) in QGIS. You can use it to create a road corridor that follows the terrain or flatten an area to a chosen elevation. The plugin saves the result as a new GeoTIFF and leaves your original DEM unchanged.
@@ -19,5 +20,6 @@ category=Raster
 icon=icon.png
 experimental=True
 deprecated=False
-changelog=0.3.6 - Add project homepage, source repository and issue tracker links.
+changelog=0.3.7 - Use scoped Qt 6 and QGIS 4 enum names and set the QGIS 4 maximum version.
+    0.3.6 - Add project homepage, source repository and issue tracker links.
 tags=dem,raster,road,buffer,terrain,corridor,flatten

@@ -1,5 +1,11 @@
 # Release notes
 
+## 0.3.7
+
+- Use scoped Qt 6 and QGIS 4 enum names.
+- Compare map units with Qgis.DistanceUnit.Meters.
+- Set qgisMaximumVersion to 4.99.
+
 ## 0.3.6
 
 - Add project homepage, source repository and issue tracker links.

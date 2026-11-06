@@ -125,7 +125,7 @@ class BufferDialog(QDialog):
 
         layout.addLayout(form)
 
-        self.buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        self.buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel)
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)
         layout.addWidget(self.buttons)
@@ -174,7 +174,7 @@ class BufferDialog(QDialog):
             if (
                 isinstance(layer, QgsVectorLayer)
                 and layer.isValid()
-                and layer.geometryType() == QgsWkbTypes.PolygonGeometry
+                and layer.geometryType() == QgsWkbTypes.GeometryType.PolygonGeometry
             ):
                 self.polygon_combo.addItem(layer.name(), layer.id())
 
