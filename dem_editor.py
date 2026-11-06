@@ -1,3 +1,4 @@
+import logging
 import math
 import os
 
@@ -9,6 +10,8 @@ from qgis.core import (
     QgsCoordinateTransformContext,
     QgsGeometry,
 )
+
+LOG = logging.getLogger(__name__)
 
 
 class DemEditError(Exception):
@@ -134,7 +137,7 @@ def _raster_mask(dem_dataset, corridor_geometry):
         try:
             gdal.Unlink(vector_path)
         except Exception:
-            pass
+            LOG.debug('Could not remove the temporary vector file.', exc_info=True)
     return mask
 
 
@@ -402,7 +405,7 @@ def _write_output(dem_path, output_path, array, dtype, nodata, progress):
             try:
                 band.ComputeStatistics(False)
             except Exception:
-                pass
+                LOG.debug('Could not compute raster statistics.', exc_info=True)
         finally:
             destination = None
     finally:
@@ -448,7 +451,6 @@ def _cross_distance_from_line(
     # Reference direction for 'both' side: overall line direction (first to last point)
     line_dx = points[-1, 0] - points[0, 0]
     line_dy = points[-1, 1] - points[0, 1]
-    line_len = max(np.hypot(line_dx, line_dy), 1.0)
 
     for i in range(count):
         xi, yi = float(x_values[i]), float(y_values[i])

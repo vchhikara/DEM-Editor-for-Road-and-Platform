@@ -39,7 +39,7 @@ class BufferDialog(QDialog):
         layout.addWidget(intro)
 
         form = QFormLayout()
-        form.setFieldGrowthPolicy(QFormLayout.AllNonFixedFieldsGrow)
+        form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.AllNonFixedFieldsGrow)
 
         self.source_combo = QComboBox()
         self.source_combo.addItem('Digitize a new centerline', 'digitize')

@@ -214,7 +214,7 @@ class DemRoadBufferEditor:
             'DEM road and platform edit',
             self._run_task,
             on_finished=self._task_finished,
-            flags=QgsTask.CanCancel,
+            flags=QgsTask.Flag.CanCancel,
             dem_path=dem_path,
             project_crs_wkt=QgsProject.instance().crs().toWkt(),
             corridor_wkt=corridor.asWkt(),

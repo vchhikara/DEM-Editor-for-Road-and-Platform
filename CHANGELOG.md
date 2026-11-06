@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.3.9
+
+- Log ignored cleanup errors instead of passing silently.
+- Use scoped Qt 6 names for QgsTask.Flag and QFormLayout.FieldGrowthPolicy.
+
 ## 0.3.8
 
 - Add tests that run full Flat and Road edits on a synthetic DEM.
