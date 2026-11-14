@@ -1,4 +1,29 @@
-# Release notes
+# Changelog
+
+## 0.4.3 — experimental candidate
+
+- Exclude online XYZ/WMS basemaps from the DEM selector and handle GDAL open errors without crashing the settings window.
+- Remove abandoned digitizing preview bands when changing corridor sources or unloading; preserve unfinished lines when temporarily switching map tools.
+- Add CRS area-of-use and local distance-distortion review, DEM coverage and NoData warnings.
+- Improve sharp-bend and grade handling; report sampled output grade, cross-road checks, local levelling and large earthworks.
+- Retain fractional output where the chosen type permits it; report platform rounding and reject NoData collisions.
+- Protect existing outputs and common sidecars, stage files before publication and clean up after cancellation or failure.
+- Improve polygon-centerline review and reject disconnected road polygons; provide resolution guidance and a scrollable settings window.
+- Show version-specific first-open notes and bundled in-QGIS help; declare QGIS 3.34–3.99.
+
+The following 0.40-series numbers were local test builds. QGIS compares 0.40 and 0.40.1 as higher than 0.4.3 despite their chronological order here.
+## 0.40.1 (local test)
+
+- Preserve digitized corners, densify road stations and connect cross-sections as a triangular road surface.
+- Fit grade-limited profiles to the sampled terrain using constrained optimization.
+- Add road preview cautions and a plain-language cut/fill and DEM comparison report.
+- Correct the misleading no-change warning when a transition remains unfinished.
+
+## 0.40
+
+- Add selected line and polygon roads, digitizing review and undo, resolution guidance and optional interpolation.
+- Add road cross-section sampling, profile and grade choices, cut/fill slopes, centerline and difference output.
+- Restrict QGIS compatibility to 3.34–3.99.
 
 ## 0.3.9
 
@@ -58,6 +83,10 @@
 - Reduce transition memory by limiting the distance calculation to the corridor surroundings.
 
 The outside transition is a visual smooth blend, not an engineered slope or earthworks design. Check results against the source DEM and project requirements.
+
+
+
+
 
 
 

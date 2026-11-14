@@ -1,27 +1,30 @@
 [general]
 name=DEM Editor for Roads and Platforms
 qgisMinimumVersion=3.34
-qgisMaximumVersion=4.99
+qgisMaximumVersion=3.99
 description=Create terrain-following road corridors and level platforms in a DEM, with smooth transitions to the surrounding ground.
-version=0.3.9
+version=0.4.3
 author=Vipul Chhikara
 email=vipul.chhikara@gmail.com
-about=DEM Editor for Roads and Platforms helps you reshape a digital elevation model (DEM) in QGIS. You can use it to create a road corridor that follows the terrain or flatten an area to a chosen elevation. The plugin saves the result as a new GeoTIFF and leaves your original DEM unchanged.
-    In Road mode, draw a centerline and set a buffer distance on the left, right, or both sides. The plugin creates a surface that is flat across the road and follows a smoothed elevation profile along its length. You can adjust the profile smoothing to control how the road follows changes in terrain.
-    In Flat corridor mode, you can set the whole area to an elevation you enter or use the mean or median elevation along its edge. Define the area by drawing a buffered line, selecting polygon features, or using all features in a polygon layer.
-    An optional outside transition blends the edited surface into the surrounding ground. The plugin also saves a separate polygon shapefile of the corridor and reports the number of changed pixels and the maximum cut and fill.
-    Before you start: Use a file-based, single-band DEM. Both the DEM and the QGIS project need projected coordinate systems with metre units. Choose a DEM resolution suited to the width you want to represent.
-    When you buffer both sides of a line, the distance applies to each side. For example, a 5 m buffer on both sides creates a road approximately 10 m wide.
-    The output retains the source DEM resolution and data type; elevations in an integer DEM are rounded. The outside transition is a smooth visual blend, so review the result separately for engineering design. The plugin requires GDAL, NumPy and SciPy in the QGIS Python environment.
+about=Create terrain-following roads and flat platforms in a new DEM. Draw a centerline, use a selected line, or use a polygon with an automatically suggested centerline. Review the corridor before editing.
+    Road profiles include terrain following, grade control and a median-based terrain fit (not a volume balance). The road is designed to be level across its width, with cut and fill outside the corridor; grid resolution and bends can affect the result. Inspect results carefully on curves, steep slopes and complex polygons.
+    The plugin reports DEM resolution, can create a finer interpolated working grid, and saves an edited raster, corridor, road centerline and plain-language cut/fill report. Optional difference raster and road sample points help review the result. Interpolation does not recover missing terrain detail.
+    Requires QGIS 3.34–3.99, GDAL, NumPy and SciPy. Licensed under GNU GPL version 3 or later. Use projected metre-based project and DEM coordinate systems, and DEM elevations in metres for grade and slope settings. Results are preliminary terrain models and require independent engineering review. See HELP.md for operating steps and limitations.
 homepage=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
 repository=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
 tracker=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/issues
 category=Raster
 icon=icon.png
-experimental=False
+experimental=True
 deprecated=False
-changelog=0.3.9 - Log ignored errors instead of passing silently and use scoped Qt 6 enum names.
+changelog=0.4.3 - Improve bend handling and raster precision, report sampled quality checks, and protect output files.
+    0.40.1 - Improve bend sampling and grade profile fitting; create a human-readable cut and fill report.
+    0.40 - Add selected line and polygon roads, preview, digitizing undo, resolution guidance, optional resampling, grade controls and cut/fill outputs.
+    0.3.9 - Log ignored errors instead of passing silently and use scoped Qt 6 enum names.
     0.3.8 - Add full DEM edit tests and mark the plugin as not experimental.
     0.3.7 - Use scoped Qt 6 and QGIS 4 enum names and set the QGIS 4 maximum version.
     0.3.6 - Add project homepage, source repository and issue tracker links.
 tags=dem,raster,road,buffer,terrain,corridor,flatten
+
+
+

@@ -2,6 +2,7 @@ from qgis.core import Qgis, QgsGeometry, QgsPointXY, QgsWkbTypes
 from qgis.gui import QgsMapTool, QgsRubberBand
 from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QColor
+from qgis.PyQt.QtWidgets import QMenu
 
 DEFAULT_SEGMENTS = 12
 MITER_JOIN = Qgis.JoinStyle.Miter
@@ -11,7 +12,7 @@ MITER_LIMIT = 5.0
 def build_buffer(line, distance, side, segments=DEFAULT_SEGMENTS):
     """Build a left, right, or both-side buffer around a line geometry."""
     if side == 'both':
-        return line.buffer(distance, segments)
+        return line.buffer(distance, segments, Qgis.EndCapStyle.Flat, MITER_JOIN, MITER_LIMIT)
     buffer_side = Qgis.BufferSide.Left if side == 'left' else Qgis.BufferSide.Right
     return line.singleSidedBuffer(distance, segments, buffer_side, MITER_JOIN, MITER_LIMIT)
 
@@ -44,11 +45,20 @@ class DirectionalBufferMapTool(QgsMapTool):
     def canvasPressEvent(self, event):
         point = self.toMapCoordinates(event.pos())
         if event.button() == Qt.MouseButton.LeftButton:
-            self.points.append(QgsPointXY(point))
+            if not self.points or point != self.points[-1]:
+                self.points.append(QgsPointXY(point))
             self.cursor_point = QgsPointXY(point)
             self.refresh_preview()
         elif event.button() == Qt.MouseButton.RightButton:
-            self.finish()
+            menu = QMenu(self.canvas)
+            finish = menu.addAction('Finish digitization')
+            clear = menu.addAction('Clear digitization')
+            selected = menu.exec_(event.globalPos())
+            if selected == finish:
+                self.finish()
+            elif selected == clear:
+                self.reset_drawing()
+                self.canvas.refresh()
 
     def canvasMoveEvent(self, event):
         self.cursor_point = QgsPointXY(self.toMapCoordinates(event.pos()))
@@ -56,17 +66,19 @@ class DirectionalBufferMapTool(QgsMapTool):
             self.refresh_preview(include_cursor=True)
 
     def canvasDoubleClickEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton:
-            point = QgsPointXY(self.toMapCoordinates(event.pos()))
-            if not self.points or point != self.points[-1]:
-                self.points.append(point)
-            self.finish()
+        # Finishing is always explicit through the right-click menu.
+        pass
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Escape:
             self.cancel()
-        elif event.key() in (Qt.Key.Key_Return, Qt.Key.Key_Enter):
-            self.finish()
+        elif event.key() == Qt.Key.Key_Backspace or (
+            event.key() == Qt.Key.Key_Z and event.modifiers() & Qt.KeyboardModifier.ControlModifier
+        ):
+            if self.points:
+                self.points.pop()
+                self.cursor_point = self.points[-1] if self.points else None
+                self.refresh_preview()
 
     def _line_points(self, include_cursor=False):
         points = list(self.points)
@@ -97,10 +109,9 @@ class DirectionalBufferMapTool(QgsMapTool):
         if len(self.points) < 2:
             return
         line = QgsGeometry.fromPolylineXY(self.points)
-        self.reset_drawing()
-        self.canvas.refresh()
-        if self.on_finish:
-            self.on_finish(line)
+        if self.on_finish and self.on_finish(line):
+            self.reset_drawing()
+            self.canvas.refresh()
 
     def reset_drawing(self):
         self.points = []
@@ -117,5 +128,4 @@ class DirectionalBufferMapTool(QgsMapTool):
 
     def deactivate(self):
         super().deactivate()
-        self.reset_drawing()
         self.canvas.refresh()
