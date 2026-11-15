@@ -1,6 +1,11 @@
 # Progress
 
-## State (2026-11-07)
+## State (2026-11-15)
+
+- Repo layout: `main` only, annotated tags `v0.3.8`, `v0.3.9`, `v0.4.3-rc.1`, one GitHub Release per tag with the ZIP as asset. No ZIP files in the tree. Steps are in `RELEASING.md`.
+- v0.4.0 and v0.4.1 are not tagged. Their ZIPs say `0.40` and `0.40.1` inside and no source commit exists. ZIPs stay in git history (commits 2f11580, 1ee3490, f5354e3).
+- `scripts/package_plugin.py` now includes every top-level `*.py`. The old allowlist dropped 12 modules.
+- 0.4.3 is a work in progress on `main` (pre-release).
 
 - Version in `metadata.txt`: 0.3.9
 - Last pushed code commit: 4f2dfa4 on `main` (check `git log` for newer commits)
