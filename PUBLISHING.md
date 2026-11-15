@@ -4,7 +4,7 @@ Status: experimental test candidate. Do not describe it as a verified constructi
 
 ## Before upload
 
-- Confirm the public repository source and documentation match the exact candidate ZIP. The public main branch inspected on 14 November 2026 still describes the older workflow; the 0.4.3 source has not been pushed.
+- Confirm the public repository source and documentation match the exact candidate ZIP. Release steps and tagging rules are in [RELEASING.md](RELEASING.md).
 - Run representative manual road and platform edits, including difficult bends, polygons, NoData, cancellation and saved-output review. Test additional operating systems and supported QGIS versions where available.
 - Confirm the declared range remains QGIS 3.34–3.99; do not claim QGIS 4 support until separately established.
 - Validate the ZIP: one ASCII top-level plugin directory, required `__init__.py`, `metadata.txt` and `LICENSE`, correct icon and no caches, test rasters, output files or nested archives. The package must be under 25 MB.
@@ -15,6 +15,6 @@ Status: experimental test candidate. Do not describe it as a verified constructi
 
 The QGIS plugin page inspected on 14 November 2026 lists 0.3.9 as the latest stable release and advertises a maximum QGIS version of 4.99. The 0.4.3 candidate declares 3.99. The public listing will not reflect that correction until a suitable update or other repository change is made.
 
-QGIS compares 0.4.3 as newer than 0.3.9, but older than the locally tested 0.40 and 0.40.1. Users who installed those test builds may not be offered 0.4.3 as an automatic upgrade. The guide describes explicitly installing the new ZIP in the current profile and verifying the installed version. Check this replacement workflow interactively before submission, and confirm that no version later than 0.3.9 was published in the meantime.
+QGIS compares 0.4.3 as newer than 0.3.9, but older than the local test builds that showed the version strings 0.40 and 0.40.1 (changelog entries 0.4.0 and 0.4.1). Users who installed those test builds may not be offered 0.4.3 as an automatic upgrade. The guide describes explicitly installing the new ZIP in the current profile and verifying the installed version. Check this replacement workflow interactively before submission, and confirm that no version later than 0.3.9 was published in the meantime.
 
 No upload or source-repository push for 0.4.3 has been performed as part of this candidate preparation.

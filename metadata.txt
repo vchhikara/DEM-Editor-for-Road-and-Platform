@@ -18,13 +18,10 @@ icon=icon.png
 experimental=True
 deprecated=False
 changelog=0.4.3 - Improve bend handling and raster precision, report sampled quality checks, and protect output files.
-    0.40.1 - Improve bend sampling and grade profile fitting; create a human-readable cut and fill report.
-    0.40 - Add selected line and polygon roads, preview, digitizing undo, resolution guidance, optional resampling, grade controls and cut/fill outputs.
+    0.4.1 - Improve bend sampling and grade profile fitting; create a human-readable cut and fill report.
+    0.4.0 - Add selected line and polygon roads, preview, digitizing undo, resolution guidance, optional resampling, grade controls and cut/fill outputs.
     0.3.9 - Log ignored errors instead of passing silently and use scoped Qt 6 enum names.
     0.3.8 - Add full DEM edit tests and mark the plugin as not experimental.
     0.3.7 - Use scoped Qt 6 and QGIS 4 enum names and set the QGIS 4 maximum version.
     0.3.6 - Add project homepage, source repository and issue tracker links.
 tags=dem,raster,road,buffer,terrain,corridor,flatten
-
-
-
