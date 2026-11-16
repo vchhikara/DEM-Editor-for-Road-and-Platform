@@ -1,5 +1,10 @@
 # Progress
 
+## State (2026-11-16, milestone done)
+
+- The owner reported that portal versions 0.4.0, 0.4.1, 0.4.2 and 0.4.3 are approved. I did not check the portal myself.
+- Open items: test on QGIS 3.x, add README screenshots, publish the next release from `main` with `RELEASING.md`.
+
 ## State (2026-11-16, later)
 
 - Portal versions 0.4.0 to 0.4.3 were deleted and re-uploaded with the `exec()` fix (the Qt6 Check had flagged `map_tool.py:56`). 0.3.8 and 0.3.9 were not touched.
