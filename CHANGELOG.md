@@ -6,8 +6,12 @@ The project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.3-rc.3] - 2026-11-16
+
+Pre-release. Experimental.
+
 ### Fixed
-- `map_tool.py` calls `exec()` instead of `exec_()`. The plugin site Qt6 Check flagged this in 0.4.3.
+- `map_tool.py` calls `exec()` instead of `exec_()`. The plugin site Qt6 Check flagged this in 0.4.3-rc.2.
 
 ## [0.4.3-rc.2] - 2026-11-16
 
@@ -115,7 +119,8 @@ Local test build. The installed plugin showed the version string `0.40`.
 ### Changed
 - Plugin description revised for clarity.
 
-[Unreleased]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.2...HEAD
+[Unreleased]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.3...HEAD
+[0.4.3-rc.3]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.2...v0.4.3-rc.3
 [0.4.3-rc.2]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.1...v0.4.3-rc.2
 [0.4.3-rc.1]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.3.9...v0.4.3-rc.1
 [0.3.9]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.3.8...v0.3.9
