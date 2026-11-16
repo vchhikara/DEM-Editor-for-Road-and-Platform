@@ -1,5 +1,12 @@
 # Progress
 
+## State (2026-11-16, later)
+
+- Portal versions 0.4.0 to 0.4.3 were deleted and re-uploaded with the `exec()` fix (the Qt6 Check had flagged `map_tool.py:56`). 0.3.8 and 0.3.9 were not touched.
+- 0.4.3 comes from tag `v0.4.3-rc.3` (GitHub pre-release). 0.4.0 to 0.4.2 are repacked old builds with the same one-line fix.
+- At the last read the Security Scan passed on 0.4.0 and was still validating on the others. The Qt6 Check was still running on all four. Re-read each version page for the results.
+- Approved: no for all four.
+
 ## State (2026-11-16)
 
 - plugins.qgis.org uploads on 2026-11-16: 0.4.0, 0.4.1, 0.4.2 (repacked old test builds, metadata only changed, silent handlers patched to log, QGIS 3.34-3.99, experimental=False) and 0.4.3 (from tag v0.4.3-rc.2, QGIS 3.34-4.99, experimental=True).
