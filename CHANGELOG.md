@@ -6,6 +6,9 @@ The project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- `map_tool.py` calls `exec()` instead of `exec_()`. The plugin site Qt6 Check flagged this in 0.4.3.
+
 ## [0.4.3-rc.2] - 2026-11-16
 
 Pre-release. Experimental.

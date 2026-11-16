@@ -1,5 +1,14 @@
 # Progress
 
+## State (2026-11-16)
+
+- plugins.qgis.org uploads on 2026-11-16: 0.4.0, 0.4.1, 0.4.2 (repacked old test builds, metadata only changed, silent handlers patched to log, QGIS 3.34-3.99, experimental=False) and 0.4.3 (from tag v0.4.3-rc.2, QGIS 3.34-4.99, experimental=True).
+- Security Scan passed on all four. Qt6 Check failed on all four. For 0.4.3 the only issue is `exec_` in `map_tool.py:56`. Fixed on main, not yet released.
+- Approved: no for all four. A moderator must approve them.
+- Version 0.4.0 shows the changelog line `0.40` on the site. This is cosmetic. Portal versions cannot be re-uploaded under the same number.
+- Real-terrain tests: `tests/real/` (36 tests, SF DEM at `/home/vipul/My Projects/Qto3D/tasks/live-test-scene/sf_dem_real.tif`). 41 tests pass on QGIS 4.2.3. QGIS 3.x is untested here.
+- Run command: `QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/share/qgis/python:/usr/lib/python3/dist-packages /tmp/demvenv/bin/python -m pytest -q tests`
+
 ## State (2026-11-15)
 
 - Repo layout: `main` only, annotated tags `v0.3.8`, `v0.3.9`, `v0.4.3-rc.1`, one GitHub Release per tag with the ZIP as asset. No ZIP files in the tree. Steps are in `RELEASING.md`.

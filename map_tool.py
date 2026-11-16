@@ -53,7 +53,7 @@ class DirectionalBufferMapTool(QgsMapTool):
             menu = QMenu(self.canvas)
             finish = menu.addAction('Finish digitization')
             clear = menu.addAction('Clear digitization')
-            selected = menu.exec_(event.globalPos())
+            selected = menu.exec(event.globalPos())
             if selected == finish:
                 self.finish()
             elif selected == clear:
