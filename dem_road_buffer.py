@@ -1,3 +1,4 @@
+import logging
 import os
 import math
 from datetime import datetime
@@ -29,6 +30,9 @@ from .release_info import should_show, show_release_info
 from .output_transaction import OutputTransaction, output_family
 
 ICON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.png')
+
+
+LOG = logging.getLogger(__name__)
 
 
 class DemRoadBufferEditor:
@@ -556,13 +560,13 @@ class DemRoadBufferEditor:
             try:
                 os.remove(kwargs['output_path'])
             except OSError:
-                pass
+                LOG.debug('Could not remove the unfinished output file.', exc_info=True)
             raise
         if task.isCanceled():
             try:
                 os.remove(result['output_path'])
             except OSError:
-                pass
+                LOG.debug('Could not remove the unfinished output file.', exc_info=True)
             raise EditCancelled()
         try:
             write_corridor(
@@ -575,7 +579,7 @@ class DemRoadBufferEditor:
             try:
                 os.remove(result['output_path'])
             except OSError:
-                pass
+                LOG.debug('Could not remove the unfinished output file.', exc_info=True)
             raise
         result['shapefile_path'] = kwargs['shapefile_path']
         result['working_path'] = working_path

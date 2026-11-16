@@ -1,6 +1,10 @@
 """Conservative resource checks for the in-memory DEM implementation."""
+import logging
 import os
 import math
+
+
+LOG = logging.getLogger(__name__)
 
 
 def grid_geometry(geotransform):
@@ -61,7 +65,7 @@ def available_memory_bytes():
                 if line.startswith('MemAvailable:'):
                     return int(line.split()[1]) * 1024
     except OSError:
-        pass
+        LOG.debug('Could not read /proc/meminfo.', exc_info=True)
     return None
 
 

@@ -1,7 +1,7 @@
 [general]
 name=DEM Editor for Roads and Platforms
 qgisMinimumVersion=3.34
-qgisMaximumVersion=3.99
+qgisMaximumVersion=4.99
 description=Create terrain-following road corridors and level platforms in a DEM, with smooth transitions to the surrounding ground.
 version=0.4.3
 author=Vipul Chhikara
@@ -9,7 +9,7 @@ email=vipul.chhikara@gmail.com
 about=Create terrain-following roads and flat platforms in a new DEM. Draw a centerline, use a selected line, or use a polygon with an automatically suggested centerline. Review the corridor before editing.
     Road profiles include terrain following, grade control and a median-based terrain fit (not a volume balance). The road is designed to be level across its width, with cut and fill outside the corridor; grid resolution and bends can affect the result. Inspect results carefully on curves, steep slopes and complex polygons.
     The plugin reports DEM resolution, can create a finer interpolated working grid, and saves an edited raster, corridor, road centerline and plain-language cut/fill report. Optional difference raster and road sample points help review the result. Interpolation does not recover missing terrain detail.
-    Requires QGIS 3.34–3.99, GDAL, NumPy and SciPy. Licensed under GNU GPL version 3 or later. Use projected metre-based project and DEM coordinate systems, and DEM elevations in metres for grade and slope settings. Results are preliminary terrain models and require independent engineering review. See HELP.md for operating steps and limitations.
+    Requires QGIS 3.34–4.99, GDAL, NumPy and SciPy. Licensed under GNU GPL version 3 or later. Use projected metre-based project and DEM coordinate systems, and DEM elevations in metres for grade and slope settings. Results are preliminary terrain models and require independent engineering review. See HELP.md for operating steps and limitations.
 homepage=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
 repository=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform
 tracker=https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/issues
@@ -18,6 +18,7 @@ icon=icon.png
 experimental=True
 deprecated=False
 changelog=0.4.3 - Improve bend handling and raster precision, report sampled quality checks, and protect output files.
+    0.4.2 - Add the first-open welcome page.
     0.4.1 - Improve bend sampling and grade profile fitting; create a human-readable cut and fill report.
     0.4.0 - Add selected line and polygon roads, preview, digitizing undo, resolution guidance, optional resampling, grade controls and cut/fill outputs.
     0.3.9 - Log ignored errors instead of passing silently and use scoped Qt 6 enum names.

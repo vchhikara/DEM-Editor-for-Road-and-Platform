@@ -549,6 +549,7 @@ def _cross_section_samples(points, distances, corridor, array, valid, inverse, p
         try:
             parts = intersection.asMultiPolyline() if intersection.isMultipart() else [intersection.asPolyline()]
         except Exception:
+            LOG.debug('Skipped a cutline part that could not be read.', exc_info=True)
             continue
         parts = [part for part in parts if len(part) >= 2]
         if not parts: continue
@@ -879,10 +880,6 @@ def _cross_distance_from_line(
     seg_dx = seg_end[:, 0] - seg_start[:, 0]
     seg_dy = seg_end[:, 1] - seg_start[:, 1]
     seg_len_sq = seg_dx ** 2 + seg_dy ** 2
-
-    # Reference direction for 'both' side: overall line direction (first to last point)
-    line_dx = points[-1, 0] - points[0, 0]
-    line_dy = points[-1, 1] - points[0, 1]
 
     for i in range(count):
         xi, yi = float(x_values[i]), float(y_values[i])

@@ -6,6 +6,20 @@ The project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.4.3-rc.2] - 2026-11-16
+
+Pre-release. Experimental.
+
+### Added
+- Real-terrain test suite in `tests/real/`. It runs 36 road and platform edits on a real DEM.
+
+### Changed
+- Declared QGIS range is 3.34 to 4.99. All 41 tests pass on QGIS 4.2.3. QGIS 3.x is not tested here.
+
+### Fixed
+- Six silent `except` handlers now write a debug log message. The plugin site flagged this pattern in 0.3.8.
+- Removed two unused variables in `dem_editor.py`.
+
 ## [0.4.3-rc.1] - 2026-11-14
 
 Pre-release. Experimental. Broader terrain and interactive tests remain open.
@@ -32,6 +46,14 @@ Pre-release. Experimental. Broader terrain and interactive tests remain open.
 ### Safety
 - Existing outputs and common sidecar files are protected.
 - Output files are staged before publication and cleaned up after cancellation or failure.
+
+## [0.4.2] - 2026-11-15
+
+Local test build of the welcome page. The installed plugin showed the version string `0.40.1`.
+The plugins.qgis.org upload is a repack of that build. Only `metadata.txt` changed: `version=0.4.2` and `experimental=False`.
+
+### Added
+- First-open welcome page.
 
 ## [0.4.1] - 2026-11-11
 
@@ -90,7 +112,8 @@ Local test build. The installed plugin showed the version string `0.40`.
 ### Changed
 - Plugin description revised for clarity.
 
-[Unreleased]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.1...HEAD
+[Unreleased]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.2...HEAD
+[0.4.3-rc.2]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.4.3-rc.1...v0.4.3-rc.2
 [0.4.3-rc.1]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.3.9...v0.4.3-rc.1
 [0.3.9]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/compare/v0.3.8...v0.3.9
 [0.3.8]: https://github.com/vchhikara/DEM-Editor-for-Road-and-Platform/releases/tag/v0.3.8

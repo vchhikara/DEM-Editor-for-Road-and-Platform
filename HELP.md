@@ -4,7 +4,7 @@ This QGIS plugin creates a new terrain model for a road corridor or level platfo
 
 ## Install and prepare
 
-1. In QGIS, open **Plugins > Manage and Install Plugins > Install from ZIP**, choose the plugin ZIP, and enable it. The declared QGIS range is 3.34–3.99; QGIS 4 is not supported. The plugin uses the GDAL, NumPy and SciPy libraries available to QGIS Python.
+1. In QGIS, open **Plugins > Manage and Install Plugins > Install from ZIP**, choose the plugin ZIP, and enable it. The declared QGIS range is 3.34–4.99. The test suite passes on QGIS 4.2.3. QGIS 3.x is not tested by the maintainer's suite. The plugin uses the GDAL, NumPy and SciPy libraries available to QGIS Python.
 
 Elevation values must be in metres for grade and cut/fill calculations. Recognized non-metre vertical-unit labels, such as feet, are rejected. A missing, unfamiliar or incorrect label is not proof that values are in metres: check the source data and vertical datum independently. Convert the elevation values, not just the label, if needed.
 

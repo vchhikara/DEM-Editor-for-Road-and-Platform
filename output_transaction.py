@@ -1,6 +1,10 @@
 """Stage all output files and publish them without overwriting existing data."""
+import logging
 import os
 import tempfile
+
+
+LOG = logging.getLogger(__name__)
 
 
 def output_family(path):
@@ -78,7 +82,7 @@ class OutputTransaction:
                 try:
                     os.remove(path)
                 except OSError:
-                    pass
+                    LOG.debug('Could not remove a staged file.', exc_info=True)
             self._created.clear()
             raise
 
